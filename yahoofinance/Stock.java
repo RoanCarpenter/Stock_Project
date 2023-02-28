@@ -44,6 +44,20 @@ public class Stock {
     private List<HistoricalDividend> dividendHistory;
     private List<HistoricalSplit> splitHistory;
     
+    /**
+     * Sends a request with the historical quotes included
+     * at the specified interval (DAILY, WEEKLY, MONTHLY).
+     * Returns null if the data can't be retrieved from Yahoo Finance.
+     * 
+     * @param symbol        the symbol of the stock for which you want to retrieve information
+     * @param interval      the interval of the included historical data
+     * @return              a {@link Stock} object containing the requested information
+     * @throws java.io.IOException when there's a connection problem
+     */
+    public static Stock get(String symbol, Interval interval) throws IOException {
+        return YahooFinance.get(symbol, HistQuotesRequest.DEFAULT_FROM, HistQuotesRequest.DEFAULT_TO, interval);
+    }
+    
     public Stock(String symbol) {
         this.symbol = symbol;
     }
